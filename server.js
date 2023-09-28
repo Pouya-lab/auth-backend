@@ -2,8 +2,10 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose');
 const cors = require('cors');
+//these two should be included 
 const bodyParser = require('body-parser');
 const cookiePaser = require('cookie-parser');
+
 const userRoute = require('./routes/user')
 const errorHandler = require('./middleware/errorMiddleware')
 
@@ -14,6 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended : false}))
 app.use(cookiePaser())
 app.use(bodyParser.json())
+ // cors takes two arguments first is the localhost for front and second is the domain name which has to be unique
 app.use(cors({
     origin : ["http://localhost:3000" , "https://auth-app.vercel.app" ],
     credentials : true
