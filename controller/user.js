@@ -25,6 +25,19 @@ exports.registerUser = asyncHandler(
             res.status(400)
             throw new Error('Password should be more than six Characters')
         }
+        if(!password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)){
+            res.status(400)
+            throw new Error("password should contain upper and lower case")
+        }
+        if(!password.match(/([0-9])/)){
+            res.status(400)
+            throw new Error("password should contain number")
+        }
+        if(!password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)){
+            res.status(400)
+            throw new Error("password must contain special characters")
+        }
+
 
         //if user exists
         const userExists = await User.findOne({email})
